@@ -1,0 +1,361 @@
+/* ===========================================================
+   AD DIEM — foglio di stile
+   Ispirazione: pagina di breviario / ordo liturgico.
+   Rubriche in rosso, carta pergamena, capitali romane per i numeri.
+   =========================================================== */
+
+:root {
+  --carta: #EAE0C8;
+  --carta-foglio: #F5EFDD;
+  --carta-ombra: #DCCEA3;
+  --inchiostro: #201D1A;
+  --inchiostro-tenue: #5C5346;
+  --rubrica: #A6242F;
+  --oro: #96792F;
+  --riga: #C9B98A;
+  --font-display: "Cinzel", Georgia, serif;
+  --font-testo: "EB Garamond", Georgia, serif;
+  --font-utility: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--carta);
+  background-image: radial-gradient(circle at 50% 0%, #F1E8CE 0%, var(--carta) 65%);
+  color: var(--inchiostro);
+  font-family: var(--font-testo);
+  display: flex;
+  justify-content: center;
+  padding: clamp(1.25rem, 5vw, 3.5rem) 1rem;
+}
+
+.pagina { width: 100%; max-width: 620px; }
+
+.foglio {
+  background: var(--carta-foglio);
+  border: 1px solid var(--carta-ombra);
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(255, 252, 240, 0.7) inset,
+              0 20px 40px -24px rgba(32, 29, 26, 0.35);
+  padding: clamp(1.6rem, 6vw, 3.2rem);
+  animation: comparsa 0.7s ease-out;
+}
+
+@keyframes comparsa {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foglio { animation: none; }
+  .riga-dialogo { animation: none !important; }
+}
+
+/* ---------- intestazione ---------- */
+
+.intestazione { text-align: center; margin-bottom: 1.6rem; }
+
+.rubrica-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rubrica);
+  margin: 0 0 0.3rem;
+  font-weight: 700;
+}
+
+.data-odierna {
+  font-family: var(--font-utility);
+  font-size: 0.82rem;
+  color: var(--inchiostro-tenue);
+  margin: 0;
+}
+
+/* ---------- countdown ---------- */
+
+.riquadro-conto { text-align: center; }
+
+.numero-grande {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.8rem, 18vw, 7rem);
+  line-height: 1;
+  color: var(--rubrica);
+}
+
+.etichetta-conto {
+  font-family: var(--font-utility);
+  font-size: 0.95rem;
+  color: var(--inchiostro-tenue);
+  margin: 0.5rem 0 0.2rem;
+}
+
+.numero-romano {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  color: var(--oro);
+  margin: 0 0 0.9rem;
+  min-height: 1.1em;
+}
+
+.ticker {
+  font-family: var(--font-utility);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  color: var(--inchiostro-tenue);
+  letter-spacing: 0.03em;
+}
+
+/* ---------- divisore ---------- */
+
+.divisore {
+  text-align: center;
+  color: var(--oro);
+  font-size: 1.1rem;
+  margin: 1.6rem 0;
+  position: relative;
+}
+
+.divisore::before, .divisore::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 38%;
+  height: 1px;
+  background: var(--riga);
+}
+.divisore::before { left: 0; }
+.divisore::after { right: 0; }
+
+/* ---------- frase del giorno ---------- */
+
+blockquote.frase {
+  font-family: var(--font-testo);
+  font-style: italic;
+  font-size: clamp(1.2rem, 3.4vw, 1.55rem);
+  line-height: 1.45;
+  margin: 0.4rem 0 0.6rem;
+}
+
+.autore {
+  font-family: var(--font-utility);
+  font-size: 0.85rem;
+  color: var(--inchiostro-tenue);
+  margin: 0;
+}
+
+/* ---------- pulsanti ---------- */
+
+.riga-azioni { margin-top: 1.1rem; text-align: right; }
+
+.pulsante-quieto {
+  font-family: var(--font-utility);
+  font-size: 0.82rem;
+  background: transparent;
+  border: 1px solid var(--oro);
+  color: var(--rubrica);
+  padding: 0.5rem 1.05rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.pulsante-quieto:not(:disabled):hover { background: rgba(166, 36, 49, 0.08); }
+.pulsante-quieto:disabled { opacity: 0.45; cursor: default; }
+
+.pulsante-quieto:focus-visible,
+.quiz-opzione:focus-visible,
+#campo-domanda:focus-visible {
+  outline: 2px solid var(--rubrica);
+  outline-offset: 2px;
+}
+
+/* ---------- quiz ---------- */
+
+.quiz-domanda {
+  font-family: var(--font-testo);
+  font-size: 1.08rem;
+  margin: 0.4rem 0 1.1rem;
+}
+
+.quiz-opzioni {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+@media (max-width: 460px) {
+  .quiz-opzioni { grid-template-columns: 1fr; }
+}
+
+.quiz-opzione {
+  font-family: var(--font-utility);
+  font-size: 0.88rem;
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--carta-ombra);
+  background: #FBF6E7;
+  color: var(--inchiostro);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.quiz-opzione:not(:disabled):hover { border-color: var(--oro); }
+.quiz-opzione.corretta {
+  border-color: var(--oro);
+  background: rgba(150, 121, 47, 0.16);
+  font-weight: 600;
+}
+.quiz-opzione.sbagliata {
+  border-color: var(--rubrica);
+  background: rgba(166, 36, 49, 0.08);
+}
+.quiz-opzione:disabled { cursor: default; opacity: 0.9; }
+
+.quiz-feedback {
+  font-family: var(--font-utility);
+  font-size: 0.86rem;
+  color: var(--inchiostro-tenue);
+  margin-top: 0.9rem;
+  min-height: 1.2em;
+}
+
+/* ---------- colloquio ---------- */
+
+.ospite-nome {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0.35rem 0 0.1rem;
+}
+
+.ospite-epoca {
+  font-family: var(--font-utility);
+  font-size: 0.78rem;
+  color: var(--oro);
+  letter-spacing: 0.06em;
+  margin: 0 0 0.6rem;
+}
+
+.ospite-presentazione {
+  font-family: var(--font-testo);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--inchiostro-tenue);
+  margin: 0 0 1.2rem;
+}
+
+.dialogo { margin-bottom: 1.1rem; }
+
+.riga-dialogo {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  gap: 0.7rem;
+  margin-bottom: 1rem;
+  animation: comparsa 0.35s ease-out;
+}
+
+/* ℣ = versetto (la domanda) · ℞ = responsorio (la risposta) */
+.sigla {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--rubrica);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.testo-dialogo {
+  font-family: var(--font-testo);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.riga-dialogo--domanda .testo-dialogo { color: var(--inchiostro-tenue); }
+
+.riga-dialogo--attesa .testo-dialogo {
+  font-style: italic;
+  color: var(--inchiostro-tenue);
+}
+
+.riga-dialogo--errore .sigla { color: var(--oro); }
+.riga-dialogo--errore .testo-dialogo {
+  font-family: var(--font-utility);
+  font-size: 0.88rem;
+  color: var(--inchiostro-tenue);
+}
+
+.colloquio-composizione { margin-top: 0.4rem; }
+
+.etichetta-nascosta {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#campo-domanda {
+  width: 100%;
+  font-family: var(--font-testo);
+  font-size: 1.02rem;
+  line-height: 1.45;
+  color: var(--inchiostro);
+  background: #FBF6E7;
+  border: 1px solid var(--carta-ombra);
+  border-radius: 3px;
+  padding: 0.7rem 0.85rem;
+  resize: vertical;
+}
+#campo-domanda:focus { border-color: var(--oro); }
+#campo-domanda:disabled { opacity: 0.6; }
+
+.riga-azioni--colloquio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.contatore-scambi {
+  font-family: var(--font-utility);
+  font-size: 0.76rem;
+  color: var(--inchiostro-tenue);
+}
+
+.avvertenza-colloquio {
+  font-family: var(--font-utility);
+  font-size: 0.74rem;
+  line-height: 1.6;
+  color: var(--inchiostro-tenue);
+  border-left: 2px solid var(--riga);
+  padding-left: 0.8rem;
+  margin: 1.4rem 0 0;
+}
+
+/* ---------- chiusura ---------- */
+
+.segnaposto-immagine {
+  text-align: center;
+  font-family: var(--font-utility);
+  font-size: 0.8rem;
+  color: var(--inchiostro-tenue);
+  border: 1px dashed var(--carta-ombra);
+  border-radius: 4px;
+  padding: 1.3rem;
+}
+
+.colophon {
+  text-align: center;
+  font-family: var(--font-utility);
+  font-size: 0.74rem;
+  color: var(--inchiostro-tenue);
+  margin-top: 1.6rem;
+  line-height: 1.7;
+}
