@@ -3,233 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Countdown personale verso il 1° settembre 2027, in stile breviario: frase del giorno, quiz e curiosità di storia, filosofia e religione.">
+<meta name="description" content="Countdown personale verso il 1° settembre 2027, in stile breviario: frase del giorno, quiz e colloquio con un ospite di storia, filosofia e religione.">
 <title>Ad Diem — verso il 1° settembre 2027</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --carta: #EAE0C8;
-    --carta-foglio: #F5EFDD;
-    --carta-ombra: #DCCEA3;
-    --inchiostro: #201D1A;
-    --inchiostro-tenue: #5C5346;
-    --rubrica: #A6242F;
-    --oro: #96792F;
-    --riga: #C9B98A;
-    --font-display: "Cinzel", Georgia, serif;
-    --font-testo: "EB Garamond", Georgia, serif;
-    --font-utility: "IBM Plex Sans", system-ui, sans-serif;
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background: var(--carta);
-    background-image: radial-gradient(circle at 50% 0%, #F1E8CE 0%, var(--carta) 65%);
-    color: var(--inchiostro);
-    font-family: var(--font-testo);
-    display: flex;
-    justify-content: center;
-    padding: clamp(1.25rem, 5vw, 3.5rem) 1rem;
-  }
-
-  .pagina { width: 100%; max-width: 620px; }
-
-  .foglio {
-    background: var(--carta-foglio);
-    border: 1px solid var(--carta-ombra);
-    border-radius: 4px;
-    box-shadow: 0 1px 0 rgba(255, 252, 240, 0.7) inset, 0 20px 40px -24px rgba(32, 29, 26, 0.35);
-    padding: clamp(1.6rem, 6vw, 3.2rem);
-    animation: comparsa 0.7s ease-out;
-  }
-
-  @keyframes comparsa {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .foglio { animation: none; }
-  }
-
-  .intestazione { text-align: center; margin-bottom: 1.6rem; }
-
-  .rubrica-eyebrow {
-    font-family: var(--font-display);
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--rubrica);
-    margin: 0 0 0.3rem;
-    font-weight: 700;
-  }
-
-  .data-odierna {
-    font-family: var(--font-utility);
-    font-size: 0.82rem;
-    color: var(--inchiostro-tenue);
-    margin: 0;
-  }
-
-  .riquadro-conto { text-align: center; }
-
-  .numero-grande {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(3.8rem, 18vw, 7rem);
-    line-height: 1;
-    color: var(--rubrica);
-  }
-
-  .etichetta-conto {
-    font-family: var(--font-utility);
-    font-size: 0.95rem;
-    color: var(--inchiostro-tenue);
-    margin: 0.5rem 0 0.2rem;
-  }
-
-  .numero-romano {
-    font-family: var(--font-display);
-    font-size: 0.85rem;
-    letter-spacing: 0.14em;
-    color: var(--oro);
-    margin: 0 0 0.9rem;
-    min-height: 1.1em;
-  }
-
-  .ticker {
-    font-family: var(--font-utility);
-    font-variant-numeric: tabular-nums;
-    font-size: 0.82rem;
-    color: var(--inchiostro-tenue);
-    letter-spacing: 0.03em;
-  }
-
-  .divisore {
-    text-align: center;
-    color: var(--oro);
-    font-size: 1.1rem;
-    margin: 1.6rem 0;
-    position: relative;
-  }
-
-  .divisore::before, .divisore::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 38%;
-    height: 1px;
-    background: var(--riga);
-  }
-  .divisore::before { left: 0; }
-  .divisore::after { right: 0; }
-
-  blockquote.frase {
-    font-family: var(--font-testo);
-    font-style: italic;
-    font-size: clamp(1.2rem, 3.4vw, 1.55rem);
-    line-height: 1.45;
-    margin: 0.4rem 0 0.6rem;
-  }
-
-  .autore {
-    font-family: var(--font-utility);
-    font-size: 0.85rem;
-    color: var(--inchiostro-tenue);
-    margin: 0;
-  }
-
-  .riga-azioni { margin-top: 1.1rem; text-align: right; }
-
-  .pulsante-quieto {
-    font-family: var(--font-utility);
-    font-size: 0.82rem;
-    background: transparent;
-    border: 1px solid var(--oro);
-    color: var(--rubrica);
-    padding: 0.5rem 1.05rem;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: background 0.15s ease;
-  }
-  .pulsante-quieto:hover { background: rgba(166, 36, 49, 0.08); }
-
-  .pulsante-quieto:focus-visible,
-  .quiz-opzione:focus-visible {
-    outline: 2px solid var(--rubrica);
-    outline-offset: 2px;
-  }
-
-  .quiz-domanda {
-    font-family: var(--font-testo);
-    font-size: 1.08rem;
-    margin: 0.4rem 0 1.1rem;
-  }
-
-  .quiz-opzioni {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
-  }
-  @media (max-width: 460px) {
-    .quiz-opzioni { grid-template-columns: 1fr; }
-  }
-
-  .quiz-opzione {
-    font-family: var(--font-utility);
-    font-size: 0.88rem;
-    text-align: left;
-    padding: 0.65rem 0.85rem;
-    border: 1px solid var(--carta-ombra);
-    background: #FBF6E7;
-    color: var(--inchiostro);
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  .quiz-opzione:not(:disabled):hover { border-color: var(--oro); }
-  .quiz-opzione.corretta {
-    border-color: var(--oro);
-    background: rgba(150, 121, 47, 0.16);
-    font-weight: 600;
-  }
-  .quiz-opzione.sbagliata {
-    border-color: var(--rubrica);
-    background: rgba(166, 36, 49, 0.08);
-  }
-  .quiz-opzione:disabled { cursor: default; opacity: 0.9; }
-
-  .quiz-feedback {
-    font-family: var(--font-utility);
-    font-size: 0.86rem;
-    color: var(--inchiostro-tenue);
-    margin-top: 0.9rem;
-    min-height: 1.2em;
-  }
-
-  .segnaposto-immagine {
-    text-align: center;
-    font-family: var(--font-utility);
-    font-size: 0.8rem;
-    color: var(--inchiostro-tenue);
-    border: 1px dashed var(--carta-ombra);
-    border-radius: 4px;
-    padding: 1.3rem;
-  }
-
-  .colophon {
-    text-align: center;
-    font-family: var(--font-utility);
-    font-size: 0.74rem;
-    color: var(--inchiostro-tenue);
-    margin-top: 1.6rem;
-    line-height: 1.7;
-  }
-</style>
+<link rel="stylesheet" href="css/stile.css">
 </head>
 <body>
 <main class="pagina">
@@ -270,215 +49,46 @@
 
     <div class="divisore" aria-hidden="true"><span>†</span></div>
 
+    <!-- ============ COLLOQUIO (dialogo con IA) ============ -->
+    <section class="riquadro-colloquio">
+      <p class="rubrica-eyebrow">Colloquio</p>
+      <p class="ospite-nome" id="ospite-nome">…</p>
+      <p class="ospite-epoca" id="ospite-epoca"></p>
+      <p class="ospite-presentazione" id="ospite-presentazione"></p>
+
+      <div class="dialogo" id="dialogo" aria-live="polite"></div>
+
+      <div class="colloquio-composizione">
+        <label class="etichetta-nascosta" for="campo-domanda">La tua domanda</label>
+        <textarea id="campo-domanda" rows="2" placeholder="Chiedi qualcosa all'ospite di oggi…"></textarea>
+        <div class="riga-azioni riga-azioni--colloquio">
+          <span class="contatore-scambi" id="contatore-scambi"></span>
+          <button type="button" class="pulsante-quieto" id="btn-chiedi">Chiedi</button>
+        </div>
+      </div>
+
+      <p class="avvertenza-colloquio">
+        Voce ricostruita da un modello linguistico, non una fonte. Le citazioni vanno
+        sempre verificate sui testi originali prima di usarle in classe.
+      </p>
+    </section>
+
+    <div class="divisore" aria-hidden="true"><span>†</span></div>
+
     <section class="segnaposto-immagine">
-      Qui arriverà l'immagine del giorno (fase 2).
+      Qui arriverà l'immagine del giorno (fase 2) — la scegliamo insieme da un fondo di pubblico dominio.
     </section>
 
     <footer class="colophon">
-      Fase 1 di 3 — countdown e contenuti di base.<br>
+      Fase 1 di 3 — countdown, contenuti di base e colloquio.<br>
       Prossimi passi: immagini a rotazione, poi (forse) un piccolo livello social con gli amici.
     </footer>
 
   </div>
 </main>
 
-<script>
-  /*
-    AD DIEM — countdown al 1° settembre 2027
-    ------------------------------------------------
-    Struttura:
-    - FRASI e QUIZ: contenuti statici, facilmente estendibili (vedi README)
-    - giorniAssoluti(): indice stabile del giorno, usato per scegliere in
-      modo deterministico la frase e il quiz "del giorno" (uguali per
-      chiunque apra la pagina lo stesso giorno)
-    - aggiornaCountdown(): ricalcola il tempo restante ogni secondo; essendo
-      un conto live, il numero può risultare 402 o 403 a seconda dell'ora
-      del giorno, non solo della data di calendario
-    - numeroRomano(): piccola conversione decorativa del numero di giorni
-    - sorprendimi(): frase casuale, indipendente dal contenuto del giorno
-
-    Fase 1 di 3. Vedi README.md per i prossimi passi.
-  */
-  
-  const DATA_TARGET = new Date("2027-09-01T00:00:00");
-
-  const FRASI = [
-    { testo: "Inquietum est cor nostrum donec requiescat in te.", autore: "Sant'Agostino, Confessioni I,1" },
-    { testo: "L'educazione è cosa del cuore.", autore: "San Giovanni Bosco" },
-    { testo: "Non scholae sed vitae discimus.", autore: "Motto scolastico (capovolge una frase di Seneca — vedi il quiz)" },
-    { testo: "Ignoranti quem portum petat, nullus suus ventus est.", autore: "Seneca, Lettere a Lucilio, 71" },
-    { testo: "Conosci te stesso.", autore: "Massima delfica, ripresa da Socrate" },
-    { testo: "La vita non esaminata non è degna di essere vissuta.", autore: "Socrate, in Platone, Apologia 38a" },
-    { testo: "Dilige et quod vis fac.", autore: "Sant'Agostino, In Ep. Ioannis, VII,8" },
-    { testo: "La virtù sta nel giusto mezzo.", autore: "Aristotele, Etica Nicomachea" },
-    { testo: "Fides quaerens intellectum.", autore: "Sant'Anselmo d'Aosta" },
-    { testo: "Non è mai troppo tardi per imparare.", autore: "Massima classica" }
-  ];
-
-  const QUIZ = [
-    {
-      domanda: "Chi scrisse le “Confessioni”?",
-      opzioni: ["Sant'Agostino", "San Girolamo", "Origene", "San Tommaso d'Aquino"],
-      corretta: 0,
-      spiegazione: "Le Confessioni (397-400 d.C. circa) sono uno dei testi autobiografici più letti della storia occidentale."
-    },
-    {
-      domanda: "In che anno si aprì il Concilio di Trento?",
-      opzioni: ["1517", "1545", "1600", "1648"],
-      corretta: 1,
-      spiegazione: "Il Concilio di Trento si aprì nel 1545 e si chiuse, tra varie interruzioni, nel 1563."
-    },
-    {
-      domanda: "Chi fu proclamato “patrono di tutti gli educatori” da Pio XII nel 1950?",
-      opzioni: ["San Giovanni Bosco", "San Giovanni Battista de La Salle", "San Filippo Neri", "San Carlo Borromeo"],
-      corretta: 1,
-      spiegazione: "San Giovanni Battista de La Salle, fondatore dei Fratelli delle Scuole Cristiane, è il patrono ufficiale degli educatori."
-    },
-    {
-      domanda: "Quale scuola filosofica fondò Zenone di Cizio?",
-      opzioni: ["Lo Scetticismo", "Lo Stoicismo", "L'Epicureismo", "Il Neoplatonismo"],
-      corretta: 1,
-      spiegazione: "Zenone fondò la Stoa ad Atene intorno al 300 a.C., dando origine allo Stoicismo."
-    },
-    {
-      domanda: "Chi scrisse la “Summa Theologiae”?",
-      opzioni: ["San Bonaventura", "Duns Scoto", "San Tommaso d'Aquino", "Sant'Alberto Magno"],
-      corretta: 2,
-      spiegazione: "San Tommaso d'Aquino la scrisse tra il 1265 e il 1274, restando incompiuta."
-    },
-    {
-      domanda: "Cosa scriveva davvero Seneca nell'Epistula 106, poi capovolto nel motto moderno?",
-      opzioni: [
-        "“Non scholae sed vitae discimus”",
-        "“Carpe diem”",
-        "“Non vitae sed scholae discimus”",
-        "“Vita brevis, ars longa”"
-      ],
-      corretta: 2,
-      spiegazione: "Seneca lamentava che si studiasse per la scuola e non per la vita: il motto oggi diffuso ribalta il suo senso originale."
-    },
-    {
-      domanda: "In quale opera si trova l'incipit sull'inquietudine del cuore?",
-      opzioni: ["La città di Dio", "Confessioni", "De Trinitate", "De Doctrina Christiana"],
-      corretta: 1,
-      spiegazione: "È l'apertura delle Confessioni (I,1), scritte da Sant'Agostino."
-    }
-  ];
-
-  function giorniAssoluti(data) {
-    return Math.floor(data.getTime() / 86400000);
-  }
-
-  function numeroRomano(num) {
-    const valori = [
-      [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"],
-      [100, "C"], [90, "XC"], [50, "L"], [40, "XL"],
-      [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]
-    ];
-    let risultato = "";
-    let n = num;
-    for (const [valore, simbolo] of valori) {
-      while (n >= valore) {
-        risultato += simbolo;
-        n -= valore;
-      }
-    }
-    return risultato;
-  }
-
-  const indiceOggi = giorniAssoluti(new Date());
-
-  function aggiornaCountdown() {
-    const ora = new Date();
-    const diff = DATA_TARGET - ora;
-    const elGiorni = document.getElementById("giorni");
-    const elRomano = document.getElementById("numero-romano");
-    const elDettaglio = document.getElementById("dettaglio");
-
-    if (diff <= 0) {
-      elGiorni.textContent = "0";
-      elRomano.textContent = "";
-      elDettaglio.textContent = "Ci siamo!";
-      return;
-    }
-
-    const giorni = Math.floor(diff / 86400000);
-    const ore = Math.floor((diff % 86400000) / 3600000);
-    const minuti = Math.floor((diff % 3600000) / 60000);
-    const secondi = Math.floor((diff % 60000) / 1000);
-
-    elGiorni.textContent = giorni;
-    elRomano.textContent = numeroRomano(giorni);
-    elDettaglio.textContent = ore + " ore, " + minuti + " minuti, " + secondi + " secondi";
-  }
-
-  let indiceFraseCorrente = null;
-
-  function mostraFrase(frase) {
-    document.getElementById("frase-testo").textContent = "“" + frase.testo + "”";
-    document.getElementById("frase-autore").textContent = "— " + frase.autore;
-  }
-
-  function impostaFraseDelGiorno() {
-    indiceFraseCorrente = indiceOggi % FRASI.length;
-    mostraFrase(FRASI[indiceFraseCorrente]);
-    document.getElementById("frase-eyebrow").textContent = "Frase del giorno";
-  }
-
-  function sorprendimi() {
-    if (FRASI.length <= 1) return;
-    let indice;
-    do {
-      indice = Math.floor(Math.random() * FRASI.length);
-    } while (indice === indiceFraseCorrente);
-    indiceFraseCorrente = indice;
-    mostraFrase(FRASI[indice]);
-    document.getElementById("frase-eyebrow").textContent = "Frase a sorpresa";
-  }
-
-  function impostaQuizDelGiorno() {
-    const quiz = QUIZ[indiceOggi % QUIZ.length];
-    document.getElementById("quiz-domanda").textContent = quiz.domanda;
-
-    const contenitore = document.getElementById("quiz-opzioni");
-    contenitore.innerHTML = "";
-
-    quiz.opzioni.forEach(function (testoOpzione, i) {
-      const bottone = document.createElement("button");
-      bottone.type = "button";
-      bottone.className = "quiz-opzione";
-      bottone.textContent = testoOpzione;
-      bottone.addEventListener("click", function () {
-        gestisciRispostaQuiz(i, quiz, contenitore);
-      });
-      contenitore.appendChild(bottone);
-    });
-
-    document.getElementById("quiz-feedback").textContent = "";
-  }
-
-  function gestisciRispostaQuiz(indiceScelto, quiz, contenitore) {
-    const bottoni = contenitore.querySelectorAll(".quiz-opzione");
-    bottoni.forEach(function (b) { b.disabled = true; });
-
-    if (indiceScelto === quiz.corretta) {
-      bottoni[indiceScelto].classList.add("corretta");
-    } else {
-      bottoni[indiceScelto].classList.add("sbagliata");
-      bottoni[quiz.corretta].classList.add("corretta");
-    }
-    document.getElementById("quiz-feedback").textContent = quiz.spiegazione;
-  }
-
-  document.getElementById("data-odierna").textContent =
-    new Date().toLocaleDateString("it-IT", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
-
-  impostaFraseDelGiorno();
-  impostaQuizDelGiorno();
-  aggiornaCountdown();
-  setInterval(aggiornaCountdown, 1000);
-
-  document.getElementById("btn-sorprendimi").addEventListener("click", sorprendimi);
-</script>
+<script src="js/contenuti.js"></script>
+<script src="js/app.js"></script>
+<script src="js/colloquio.js"></script>
 </body>
 </html>
