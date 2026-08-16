@@ -40,6 +40,15 @@
 
     <div class="divisore" aria-hidden="true"><span>†</span></div>
 
+    <section class="riquadro-quiz">
+      <p class="rubrica-eyebrow">Quiz del giorno</p>
+      <p class="quiz-domanda" id="quiz-domanda">…</p>
+      <div class="quiz-opzioni" id="quiz-opzioni"></div>
+      <p class="quiz-feedback" id="quiz-feedback" role="status"></p>
+    </section>
+
+    <div class="divisore" aria-hidden="true"><span>†</span></div>
+
     <!-- ============ COLLOQUIO (dialogo con IA) ============ -->
     <section class="riquadro-colloquio">
       <p class="rubrica-eyebrow">Colloquio</p>
@@ -63,31 +72,28 @@
         sempre verificate sui testi originali prima di usarle in classe.
       </p>
     </section>
-    
-    <div class="divisore" aria-hidden="true"><span>†</span></div>
-
-    <section class="riquadro-quiz">
-      <p class="rubrica-eyebrow">Quiz del giorno</p>
-      <p class="quiz-domanda" id="quiz-domanda">…</p>
-      <div class="quiz-opzioni" id="quiz-opzioni"></div>
-      <p class="quiz-feedback" id="quiz-feedback" role="status"></p>
-    </section>
 
     <div class="divisore" aria-hidden="true"><span>†</span></div>
 
-    <section class="segnaposto-immagine">
-      Qui arriverà l'immagine del giorno (fase 2)
+    <!-- ============ OPERA DEL GIORNO ============ -->
+    <section class="riquadro-opera">
+      <p class="rubrica-eyebrow">Opera del giorno</p>
+      <div class="opera-cornice" id="opera-cornice"></div>
+      <div class="opera-didascalia" id="opera-didascalia"></div>
     </section>
 
     <footer class="colophon">
-      Forse un piccolo livello social con gli amici (fase 3).
+      Fase 2 di 3 — countdown, frase, quiz, colloquio e opera del giorno.<br>
+      Prossimo passo, se ne varrà la pena: un piccolo livello condiviso con gli amici.
     </footer>
 
   </div>
 </main>
 
 <script src="js/contenuti.js"></script>
+<script src="js/opere.js"></script>
 <script src="js/app.js"></script>
+<script src="js/immagine.js"></script>
 <script src="js/colloquio.js"></script>
 </body>
 </html>
