@@ -341,15 +341,81 @@ blockquote.frase {
 
 /* ---------- chiusura ---------- */
 
-.segnaposto-immagine {
+/* ---------- opera del giorno ---------- */
+
+.opera-cornice {
+  margin: 0.6rem 0 1.1rem;
   text-align: center;
+}
+
+.opera-immagine {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  /* Passe-partout chiaro e filo d'oro: la stampa incorniciata,
+     non la fotografia a tutto sanguinamento. */
+  padding: clamp(0.5rem, 2vw, 0.9rem);
+  background: #FBF6E7;
+  border: 1px solid var(--oro);
+  box-shadow: 0 10px 24px -18px rgba(32, 29, 26, 0.6);
+}
+
+.opera-mancante {
   font-family: var(--font-utility);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  line-height: 1.6;
   color: var(--inchiostro-tenue);
   border: 1px dashed var(--carta-ombra);
   border-radius: 4px;
-  padding: 1.3rem;
+  padding: 1.2rem;
+  margin: 0;
 }
+
+.opera-didascalia { text-align: center; }
+
+.opera-autore {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin: 0 0 0.15rem;
+}
+
+.opera-riga {
+  font-family: var(--font-testo);
+  font-size: 1.05rem;
+  margin: 0 0 0.15rem;
+}
+
+.opera-dove {
+  font-family: var(--font-utility);
+  font-size: 0.78rem;
+  color: var(--oro);
+  letter-spacing: 0.04em;
+  margin: 0 0 0.8rem;
+}
+
+.opera-nota {
+  font-family: var(--font-testo);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--inchiostro-tenue);
+  text-align: left;
+  margin: 0 0 0.8rem;
+}
+
+.opera-fonte {
+  font-family: var(--font-utility);
+  font-size: 0.74rem;
+  margin: 0;
+}
+
+.opera-fonte a {
+  color: var(--inchiostro-tenue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.opera-fonte a:hover { color: var(--rubrica); }
 
 .colophon {
   text-align: center;
