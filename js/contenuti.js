@@ -21,7 +21,13 @@ const FRASI = [
   { testo: "Non è mai troppo tardi per imparare.", autore: "Massima classica" }
 ];
 
-/* ---------- quiz ---------- */
+/* ---------- quiz ----------
+   Sono otto di proposito: gli ospiti sono ventuno, e 21 e 8 non
+   hanno divisori in comune. Così i due cicli si sfasano e le
+   combinazioni ospite-domanda sono 168 prima di ripetersi.
+   Se aggiungi domande, evita di arrivare a un numero che condivida
+   divisori con 21 (cioè 3, 7, 14, 21…), o le coppie si irrigidiscono.
+   ------------------------------------------------------------ */
 
 const QUIZ = [
   {
@@ -70,6 +76,12 @@ const QUIZ = [
     opzioni: ["La città di Dio", "Confessioni", "De Trinitate", "De Doctrina Christiana"],
     corretta: 1,
     spiegazione: "È l'apertura delle Confessioni (I,1), scritte da Sant'Agostino."
+  },
+  {
+    domanda: "Chi fu proclamata dottore della Chiesa nel 2012, insieme a Giovanni d'Ávila?",
+    opzioni: ["Ildegarda di Bingen", "Caterina da Siena", "Teresa d'Ávila", "Edith Stein"],
+    corretta: 0,
+    spiegazione: "Benedetto XVI proclamò Ildegarda di Bingen dottore della Chiesa il 7 ottobre 2012, poche settimane dopo averla iscritta al catalogo dei santi."
   }
 ];
 
@@ -80,9 +92,42 @@ const QUIZ = [
    chiunque potrebbe riscriverle e usare la tua chiave API per
    farsi rispondere qualunque cosa.
    L'id deve coincidere con quello in proxy/Codice.gs.
+
+   Ordine cronologico di nascita: la rotazione percorre i secoli
+   in fila, dal sub-apostolico a ieri.
    ------------------------------------------------------------ */
 
 const OSPITI = [
+  {
+    id: "ignazio",
+    nome: "Ignazio di Antiochia",
+    epoca: "c. 35 – c. 107",
+    presentazione: "Vescovo condotto a Roma per essere giustiziato. Le sue sette lettere le scrisse durante quel viaggio, sapendo come sarebbe finito."
+  },
+  {
+    id: "perpetua",
+    nome: "Perpetua",
+    epoca: "c. 181 – 203",
+    presentazione: "Giovane madre cartaginese, uccisa nell'anfiteatro a ventidue anni. Il suo diario dal carcere è una delle pochissime voci femminili giunte intatte dall'antichità."
+  },
+  {
+    id: "origene",
+    nome: "Origene",
+    epoca: "c. 185 – c. 254",
+    presentazione: "Alessandrino, il primo a costruire una teologia sistematica. Tre secoli dopo la morte alcune sue tesi furono condannate: geniale e scomodo insieme."
+  },
+  {
+    id: "ambrogio",
+    nome: "Ambrogio",
+    epoca: "339 – 397",
+    presentazione: "Governatore acclamato vescovo di Milano quando non era ancora battezzato. Impose una penitenza pubblica all'imperatore Teodosio, e la spuntò."
+  },
+  {
+    id: "crisostomo",
+    nome: "Giovanni Crisostomo",
+    epoca: "c. 349 – 407",
+    presentazione: "“Bocca d'oro”, il più grande predicatore greco. Disse in faccia alla corte imperiale cosa pensava del lusso, e morì in esilio."
+  },
   {
     id: "agostino",
     nome: "Agostino d'Ippona",
@@ -90,28 +135,10 @@ const OSPITI = [
     presentazione: "Retore convertito, vescovo, autore delle Confessioni. Parla volentieri di memoria, tempo, desiderio e inquietudine."
   },
   {
-    id: "seneca",
-    nome: "Lucio Anneo Seneca",
-    epoca: "4 a.C. – 65 d.C.",
-    presentazione: "Stoico, precettore e poi vittima di Nerone. Sul tempo che ci sfugge e su come spenderlo ha scritto pagine difficili da dimenticare."
-  },
-  {
-    id: "socrate",
-    nome: "Socrate",
-    epoca: "470 – 399 a.C.",
-    presentazione: "Non ha lasciato nulla di scritto. Risponde quasi sempre con un'altra domanda: è il suo mestiere, non un difetto."
-  },
-  {
-    id: "tommaso",
-    nome: "Tommaso d'Aquino",
-    epoca: "1225 – 1274",
-    presentazione: "Domenicano, maestro a Parigi. Procede per obiezioni e distinzioni: chiedigli qualcosa di contorto e sarà a suo agio."
-  },
-  {
-    id: "marcoaurelio",
-    nome: "Marco Aurelio",
-    epoca: "121 – 180",
-    presentazione: "Imperatore che scriveva appunti a sé stesso, di notte, in greco, senza intenzione di pubblicarli."
+    id: "benedetto",
+    nome: "Benedetto da Norcia",
+    epoca: "c. 480 – 547",
+    presentazione: "Scrisse una Regola breve e senza slanci, pensata per gente comune. Su quella misura si è organizzata buona parte dell'Europa."
   },
   {
     id: "anselmo",
@@ -120,9 +147,81 @@ const OSPITI = [
     presentazione: "Monaco e arcivescovo di Canterbury. La fede che cerca di capire sé stessa: fides quaerens intellectum."
   },
   {
-    id: "boezio",
-    nome: "Severino Boezio",
-    epoca: "477 – 524",
-    presentazione: "Scrisse la Consolazione della Filosofia in carcere, in attesa dell'esecuzione. Sulla fortuna che gira, sa il fatto suo."
+    id: "ildegarda",
+    nome: "Ildegarda di Bingen",
+    epoca: "1098 – 1179",
+    presentazione: "Badessa, visionaria, compositrice, e per giunta autrice di trattati di medicina. Dottore della Chiesa dal 2012."
+  },
+  {
+    id: "francesco",
+    nome: "Francesco d'Assisi",
+    epoca: "1181 – 1226",
+    presentazione: "Figlio di mercante che restituì al padre perfino i vestiti. Chiamava fratelli il sole, la morte e i lupi."
+  },
+  {
+    id: "tommaso",
+    nome: "Tommaso d'Aquino",
+    epoca: "1225 – 1274",
+    presentazione: "Domenicano, maestro a Parigi. Procede per obiezioni e distinzioni: chiedigli qualcosa di contorto e sarà a suo agio."
+  },
+  {
+    id: "caterina",
+    nome: "Caterina da Siena",
+    epoca: "1347 – 1380",
+    presentazione: "Terziaria domenicana senza studi regolari. Dettava lettere al papa chiamandolo “babbo mio dolce” e intimandogli di tornare a Roma."
+  },
+  {
+    id: "lutero",
+    nome: "Martin Lutero",
+    epoca: "1483 – 1546",
+    presentazione: "Monaco agostiniano e professore di Bibbia. Da una disputa sulle indulgenze nacque una frattura che dura ancora."
+  },
+  {
+    id: "teresa",
+    nome: "Teresa d'Ávila",
+    epoca: "1515 – 1582",
+    presentazione: "Mistica e fondatrice instancabile, con una prosa spiritosa e nessuna pazienza per la devozione sdolcinata."
+  },
+  {
+    id: "pascal",
+    nome: "Blaise Pascal",
+    epoca: "1623 – 1662",
+    presentazione: "Matematico di prim'ordine e apologeta per frammenti. Portava cucita nella giacca la nota di una notte di fuoco."
+  },
+  {
+    id: "newman",
+    nome: "John Henry Newman",
+    epoca: "1801 – 1890",
+    presentazione: "Anglicano di Oxford passato a Roma nel 1845, pagandola con amicizie e carriera. Sullo sviluppo del dogma e sulla coscienza ha scritto pagine decisive."
+  },
+  {
+    id: "guardini",
+    nome: "Romano Guardini",
+    epoca: "1885 – 1968",
+    presentazione: "Italiano di nascita, tedesco di formazione. Liturgia, modernità ed educazione: maestro di una generazione intera."
+  },
+  {
+    id: "stein",
+    nome: "Edith Stein",
+    epoca: "1891 – 1942",
+    presentazione: "Assistente di Husserl, ebrea, atea, poi carmelitana. Deportata ad Auschwitz proprio in quanto ebrea, non nonostante il velo."
+  },
+  {
+    id: "rahner",
+    nome: "Karl Rahner",
+    epoca: "1904 – 1984",
+    presentazione: "Gesuita, il teologo più influente del Novecento cattolico. Parte sempre dall'uomo per arrivare al mistero."
+  },
+  {
+    id: "bonhoeffer",
+    nome: "Dietrich Bonhoeffer",
+    epoca: "1906 – 1945",
+    presentazione: "Pastore luterano impiccato a Flossenbürg poche settimane prima della fine della guerra. Sulla “grazia a caro prezzo” non faceva sconti."
+  },
+  {
+    id: "ratzinger",
+    nome: "Joseph Ratzinger",
+    epoca: "1927 – 2022",
+    presentazione: "Professore, perito conciliare, prefetto, papa, e infine il primo in sei secoli a rinunciare. Scrive con una chiarezza rara."
   }
 ];
