@@ -1,7 +1,7 @@
 /* ===========================================================
    AD DIEM — opera del giorno
    -----------------------------------------------------------
-   Ruota su 23 opere. Ventitré è primo, quindi si sfasa con
+   Ruota su 85 opere. 85 = 5 × 17, quindi si sfasa con
    frasi (53), domande (121) e ospiti (21): la quaterna non si
    ripete mai nell'arco che ci interessa.
 
@@ -27,6 +27,10 @@ function componiDidascalia(opera) {
   riga.appendChild(titolo);
   riga.appendChild(document.createTextNode(", " + opera.anno));
 
+  const periodo = document.createElement("p");
+  periodo.className = "opera-periodo";
+  periodo.textContent = opera.periodo;
+
   const autore = document.createElement("p");
   autore.className = "opera-autore";
   autore.textContent = opera.autore;
@@ -35,6 +39,7 @@ function componiDidascalia(opera) {
   dove.className = "opera-dove";
   dove.textContent = opera.dove;
 
+  contenitore.appendChild(periodo);
   contenitore.appendChild(autore);
   contenitore.appendChild(riga);
   contenitore.appendChild(dove);
@@ -46,14 +51,18 @@ function componiDidascalia(opera) {
     contenitore.appendChild(nota);
   }
 
-  if (opera.commons) {
+  /* Il link alla fonte si costruisce dal termine di ricerca invece
+     che da un URL fisso: una ricerca su Commons risponde sempre,
+     mentre un indirizzo di categoria scritto a mano può non esistere. */
+  if (opera.ricerca) {
     const fonte = document.createElement("p");
     fonte.className = "opera-fonte";
     const link = document.createElement("a");
-    link.href = opera.commons;
+    link.href = "https://commons.wikimedia.org/w/index.php?ns6=1&search=" +
+                encodeURIComponent(opera.ricerca);
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    link.textContent = "Fonte: Wikimedia Commons";
+    link.textContent = "Cerca su Wikimedia Commons";
     fonte.appendChild(link);
     contenitore.appendChild(fonte);
   }
